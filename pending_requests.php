@@ -132,7 +132,7 @@
 							die("Connection failed: " . $conn->connect_error);
 						}
 						
-						$sql="SELECT * FROM `system_user` s ,`request` r WHERE r.user_id=s.user_id AND r.request_status='Pending'";
+						$sql="SELECT * FROM `system_user` s ,`request` r WHERE r.user_id=s.user_id AND r.request_status='Pending' AND r.request_type='Normal' AND s.user_type='principleinvestigator'";
 						$result = $conn->query($sql);
 						
 						if($result->num_rows > 0){
