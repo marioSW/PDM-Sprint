@@ -169,14 +169,14 @@
 						
                     </div><!--col-md-8-->
                     
-                    <div id="dashboard-right" class="col-md-4">
+                <div id="dashboard-right" class="col-md-4">
                         
-                        <br />
-                                                
-                    </div><!-- col-md-4 -->
+                        <h5 class="subtitle">Announcements</h5>
+                        
+                        <div class="divider15"></div>
+                 
+                                      
                 </div><!--row-->
-							
-      
             
 				      <div class="footer">
                     <div class="footer-left">
