@@ -140,8 +140,7 @@
 										<li>
 											
 											<div class="comment-info">
-												<h4><b><?php echo "Request ID : ".$reqid; ?></b></h4>
-												<h5><b><?php echo "Users name : ".$username; ?></h5>
+												<h4><b><?php echo "Requested by	 : ".$username; ?></h4>
 												<h5><?php echo "<b>Request Type  :</b> ".$reqtype; ?></h5>
 												<h5><?php echo "<b>Request Status:</b> ".$reqstat; ?></h5>
 												<h5><?php echo "<b>Request Date  :</b> ".$reqdate; ?></h5>

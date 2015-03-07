@@ -80,5 +80,20 @@ class DB_CONNECT{
 	
 	}
 	
+	#Function to approve requests
+	function approve_requests($reqid)
+	{
+		$con =new mysqli(DB_SERVER, DB_USER, DB_PASSWORD,DB_DATABASE);
+		$qry="update `request` set request_status='Approved' where request_id=".$reqid;
+		$result=$con->query($qry);
+		if($result == 1)
+		{
+		
+		}
+		else
+		{
+			echo "Failed to Approve";
+		}
+	}
 }
 ?>

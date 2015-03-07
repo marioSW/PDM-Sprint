@@ -142,7 +142,7 @@
                                         <h5><?php echo "<b>Request Type :</b> ".$reqtype; ?></h5>
 										
                                         <p>
-                                            <a href="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up glyphicon-white"></span> Approve</a>
+                                           <button type="button" onclick=""> <a href="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up glyphicon-white"></span> Approve</a>
                                             <a href="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-thumbs-down"></span> Reject</a>
                                         </p>
                                     </div>
