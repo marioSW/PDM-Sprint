@@ -118,12 +118,11 @@
 							$reqtype;
 							$usrid;
 							$reqdate;
+							$username;
 							
 							$response=$db->retrieve_requested();
 							$json=json_decode($response,true);
-							//echo print_r($json[0]["REQ_TYPE"])."</br>";
-							//echo print_r($json[1]["REQ_TYPE"]);
-							
+
 							for($x=0;$x<count($json);$x++)
 							{
 								if(isset($json[$x]['REQ_ID']) != null)
@@ -132,13 +131,13 @@
 								$reqtype=$json[$x]['REQ_TYPE'];
 								$usrid=$json[$x]['USR_ID'];
 								$reqdate=$json[$x]['REQ_DATE'];
-							
+								$username=$db->retrieve_user_name($usrid);
 							
 							?>
                                 <li>
                                     
                                     <div class="comment-info">
-                                        <h4><b><?php echo "Request ID : ".$reqid; ?></b></h4>
+                                        <h4><b><?php echo "Requested by : ".$username; ?></b></h4>
 										<h5><?php echo "<b>Request Date :</b> ".$reqdate; ?></h>
                                         <h5><?php echo "<b>Request Type :</b> ".$reqtype; ?></h5>
 										
