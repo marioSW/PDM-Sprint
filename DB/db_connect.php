@@ -35,17 +35,36 @@ class DB_CONNECT{
 		$con->close();
 	
 	}
+	function retrieve_user_name($id)
+	{
+		$con =new mysqli(DB_SERVER, DB_USER, DB_PASSWORD,DB_DATABASE);
+		$qry="select systemuser_name from `system_user` where user_id='".$id."'";
+		$result=$con->query($qry);
+		if( $result->num_rows>0)
+			{
+				
+				while($row = $result->fetch_assoc())
+				{
+					$response=$row["systemuser_name"];
+				}
+			}
+			return $response;
+	}
 	function retrieve_all_requests()
 	{
+	$user_name;
 	$response;
 		$con =new mysqli(DB_SERVER, DB_USER, DB_PASSWORD,DB_DATABASE);
 		$qry="select * from request";
 		$result=$con->query($qry);
 	
+		
 		if( $result->num_rows>0)
 			{
+				
 				while($row = $result->fetch_assoc())
 				{
+
 					$response[]=array('REQ_ID'=>$row["request_id"],'REQ_TYPE'=>$row["request_type"],'REQ_DATE'=>$row["request_date"],'REQ_STAT'=>$row["request_status"],'USR_ID'=>$row["user_id"]);
 		
 				}
@@ -60,5 +79,6 @@ class DB_CONNECT{
 		$con->close();
 	
 	}
+	
 }
 ?>

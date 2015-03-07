@@ -48,26 +48,6 @@
         <div class="logo">
              <a href="admin.php"><img src="images/thumbs/logo.png" alt="" /></a>
         </div>
-		 <div class="headerinner" style="margin-left: 260px;">
-            <ul class="headmenu">
-          <li class="right">
-                    <div class="userloggedinfo">
-                        <img src="images/thumbs/user_login.png" alt="">
-						
-						
-                        <div class="userinfo">
-                            <h5><?php  echo $_SESSION['name'];?><br><small><?php echo $_SESSION['mail'];?></small></h5>
-							<h6></h6>
-                            <ul>
-								<li><a href="">View Profile</a></li>
-								<li><a href="">Account Setting</a></li>
-                                <li><a href="login.php">Sign Out</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-    </ul></div>
-        </div>
        <div class="headerinner" style="margin-left: 260px;">
             <ul class="headmenu">
           <li class="right">
@@ -139,7 +119,8 @@
 										//variables
 										$reqid;
 										$reqtype;
-										$usrid;
+										$userid;
+										$usrname;
 										$reqstat;
 										$reqdate;
 										
@@ -151,15 +132,16 @@
 											{
 												$reqid=$json[$x]['REQ_ID'];
 												$reqtype=$json[$x]['REQ_TYPE'];
-												$usrid=$json[$x]['USR_ID'];
+												$userid=$json[$x]['USR_ID'];
 												$reqstat=$json[$x]['REQ_STAT'];
 												$reqdate=$json[$x]['REQ_DATE'];
-							
+												$username=$db->retrieve_user_name($userid);
 										?>
 										<li>
 											
 											<div class="comment-info">
 												<h4><b><?php echo "Request ID : ".$reqid; ?></b></h4>
+												<h5><b><?php echo "Users name : ".$username; ?></h5>
 												<h5><?php echo "<b>Request Type  :</b> ".$reqtype; ?></h5>
 												<h5><?php echo "<b>Request Status:</b> ".$reqstat; ?></h5>
 												<h5><?php echo "<b>Request Date  :</b> ".$reqdate; ?></h5>
