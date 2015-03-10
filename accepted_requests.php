@@ -171,7 +171,9 @@
                     
 				<div id="dashboard-right" class="col-md-4">
                         
-                        <h5 class="subtitle">Announcements</h5>
+                        <h5 class="subtitle">Notices</h5>
+						
+						<p>This includes about notices</p>
                         
                         <div class="divider15"></div>
                       

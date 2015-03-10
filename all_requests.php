@@ -123,7 +123,7 @@
 							die("Connection failed: " . $conn->connect_error);
 						}
 						
-						$sql="SELECT * FROM `system_user` s ,`request` r WHERE r.user_id=s.user_id";
+						$sql="SELECT * FROM `system_user` s ,`request` r WHERE r.user_id=s.user_id AND r.request_status='Pending' AND r.request_type='Normal' AND s.user_type='principleinvestigator'";
 						$result = $conn->query($sql);
 						
 						if($result->num_rows > 0){
@@ -150,8 +150,8 @@
 						echo "<tbody>";
 						echo "<tr class=\"gradeX\">";
 						echo "<td>".$row["user_un"]."</td>";
-						echo "<td>".$row["user_type"]."</td>";
 						echo "<td>".$row["request_type"]."</td>";
+						echo "<td>".$row["request_status"]."</td>";
 						echo "<td>".$row["request_date"]."</td>";
 						echo "</tr>";
 						echo "</tbody>";
@@ -176,7 +176,9 @@
                     
                     <div id="dashboard-right" class="col-md-4">
                         
-                        <h5 class="subtitle">Announcements</h5>
+                        <h5 class="subtitle">Notices</h5>
+						
+						<p>This includes about notices</p>
                         
                         <div class="divider15"></div>
                     
