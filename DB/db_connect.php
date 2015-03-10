@@ -104,16 +104,16 @@ class DB_CONNECT{
 	function retrieve_req()
 	{
 		$con=new mysqli(DB_SERVER,DB_USER,DB_PASSWORD,DB_DATABASE);
-		$qry="select `request_id` from `request";
+		$qry="select request_id from `request`";
 		$result=$con->query($qry);
-		
+		$response;
 		if( $result->num_rows>0)
 			{
 				
 				while($row = $result->fetch_assoc())
 				{
 
-					$response[]=array('REQ_ID'=>$row["request_id"],'REQ_TYPE'=>$row["request_type"],'REQ_DATE'=>$row["request_date"],'REQ_STAT'=>$row["request_status"],'USR_ID'=>$row["user_id"]);
+					$response[]=array('REQ_ID'=>$row["request_id"]);
 		
 				}
 			}
@@ -122,9 +122,9 @@ class DB_CONNECT{
 				$response[]=array("success"=>"error");
 	
 			}
-
-		return json_encode($response);
 		$con->close();
+		return json_encode($response);
+		
 		
 	}
 }

@@ -194,10 +194,38 @@
 						<div class="widgetbox">
 							<h4 class="widgettitle">Approve or Reject <a class="close">&times;</a> <a class="minimize">&#8211;</a></h4>
 							<div class="widgetcontent">
-                              choose request id: 
-								<select class="uniformselect" style="opacity:0" >
-								<option>test1</option>
-								</select>
+								<div>
+									choose request id: 
+									<select class="uniformselect" style="width:170">
+									<option value=""> choose an Id </option>
+									<?php 
+									$only_requestid;
+									$x=0;
+							
+									$response=$db->retrieve_req();
+									$json=json_decode($response,true);
+							
+									for($x=0;$x<count($json);$x++)
+									{
+								
+										if(isset($json[$x]['REQ_ID']) != null)
+										{
+											echo "<option value='".$json[$x]['REQ_ID']."'>".$json[$x]['REQ_ID']."</option>";
+										}
+								
+							
+									}	
+								
+									?>
+									</select>
+								</div>
+								<br>
+								<div>
+									<button href="" id="submit" onclick="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up glyphicon-white"></span> Approve</button>
+									<button href="" id="reject" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-thumbs-down"></span> Reject</button>
+								</div>
+									
+								
 							</div>
 						</div><!--widgetbox-->
 					</div><!--col-md-8-->
