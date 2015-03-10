@@ -115,9 +115,17 @@
 										<?php
 										require_once __DIR__ .'/DB/db_connect.php';
 										$db=new DB_CONNECT();
-										
+
+										function approve_req($reqid)
+										{			
+											if(isset($_POST["$reqid"]))
+											$db->approve_requests($reqid);
+											
+	
+										}
+
 										//variables
-										$reqid;
+										$reqid=array();
 										$reqtype;
 										$userid;
 										$usrname;
@@ -130,7 +138,7 @@
 										{
 											if(isset($json[$x]['REQ_ID']) != null)
 											{
-												$reqid=$json[$x]['REQ_ID'];
+												$reqid[$x]=$json[$x]['REQ_ID'];
 												$reqtype=$json[$x]['REQ_TYPE'];
 												$userid=$json[$x]['USR_ID'];
 												$reqstat=$json[$x]['REQ_STAT'];
@@ -139,15 +147,15 @@
 										?>
 										<li>
 											
-											<div class="comment-info">
-												<h4><b><?php echo "Requested by	 : ".$username; ?></h4>
+											<div class="row">
+											
+												<div class=col-md-6>
+												<h4><b><?php echo "Requested by	 : ".$username?></b></h4>																						
 												<h5><?php echo "<b>Request Type  :</b> ".$reqtype; ?></h5>
 												<h5><?php echo "<b>Request Status:</b> ".$reqstat; ?></h5>
 												<h5><?php echo "<b>Request Date  :</b> ".$reqdate; ?></h5>
-												<p>
-													<a href="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up glyphicon-white"></span> Approve</a>
-													<a href="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-thumbs-down"></span> Reject</a>
-												</p>
+												</div>
+												<span class=col-md-6 ><h5><b><?php echo "Request ID   :".$reqid[$x]?></h5></b></span>	
 											</div>
 										</li>
                                 
@@ -162,7 +170,8 @@
                                         <h5><a href="">No Results Found</a></h5>
                                         <p>if there are any descriptions it would be like so</p>
                                         <p>
-                                            <a href="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up glyphicon-white"></span> Approve</a>
+                                            <!--<a href="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up glyphicon-white"></span> Approve</a> -->
+											<button href="" id="submit" onclick="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up glyphicon-white"></span> Approve</button>
                                             <a href="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-thumbs-down"></span> Reject</a>
                                         </p>
                                     </div>
@@ -170,6 +179,8 @@
 								<?php
 											}
 										}
+						
+									
 								?>
                                 <li><a href="">View More Requests</a></li>
                             </ul>
@@ -178,7 +189,18 @@
                         <br />
                         
                         
-                    </div><!--col-md-8-->
+                    </div><!--col-md-8-->	
+					<div class="col-md-4">
+						<div class="widgetbox">
+							<h4 class="widgettitle">Approve or Reject <a class="close">&times;</a> <a class="minimize">&#8211;</a></h4>
+							<div class="widgetcontent">
+                              choose request id: 
+								<select class="uniformselect" style="opacity:0" >
+								<option>test1</option>
+								</select>
+							</div>
+						</div><!--widgetbox-->
+					</div><!--col-md-8-->
                 </div><!--row-->
                 
                    <div class="footer">
