@@ -115,9 +115,7 @@
                         <div class="widgetcontent nopadding">
                             <ul class="commentlist">
 						
-						
 						<br/>
-						
 						
 						<?php
 							
@@ -140,16 +138,18 @@
 						{
 						$usernames=$row['user_un'];
 						$desgnation=$row['user_type'];
+						$reqid=$row['request_id'];
 						$type=$row['request_type'];
 						$date=$row['request_date'];
-						
-							
 						
                             echo "<ul class=\"commentlist\">
                                 <li>
 									
                                     <div class=\"comment-info\">
                                      
+									<h5><b>Request ID :</b> ".$reqid."</h5>
+									 </br> 
+									 
 									<h5><b>UserName :</b> ".$usernames."</h5>
 									 </br>
 									 
@@ -162,20 +162,19 @@
 									<h5><b>Request Date :</b> ".$date."</h5>
 									 </br>
 									 
-									 
-                                        <p>
-                                            <a href=\"\" class=\"btn btn-success btn-sm\" name=\"Accept1\" id=\"Accept1\"><span class=\"glyphicon glyphicon-thumbs-up glyphicon-white\"></span> Approve</a>
-                                            <a href=\"\" class=\"btn btn-default btn-sm\" name=\"Reject1\" id=\"Reject1\"><span class=\"glyphicon glyphicon-thumbs-down\"></span> Reject</a>
-                                        </p>
                                     </div>
+									
                                 </li>
                                 
                             </ul>";
 							
+							}
 							
 							}
-							}
+							
 							?>
+							
+							
 							
 						</div>
 						
@@ -183,14 +182,53 @@
 					
                     </div><!--col-md-8-->
 					
+					
+					
 					<div id="dashboard-right" class="col-md-4">
                         
-                        <h5 class="subtitle">Announcements</h5>
-                        
+                        <h5 class="subtitle">Notices</h5>
+						
+						<p>This includes about notices</p>
+						
                         <div class="divider15"></div>
-                 
-                                      
-                </div><!--row-->
+						
+						<hr style="height:2px;border:none;color:#0033FF;background-color:#0033FF;" />
+						
+						<?php
+						
+						$servername = "localhost";
+						$username = "root";
+						$password = "";
+						$dbname = "storage_system";
+						// Create connection
+						$conn = new mysqli($servername, $username, $password, $dbname);
+						// Check connection
+						if ($conn->connect_error) {
+							die("Connection failed: " . $conn->connect_error);
+						}
+						
+						$query = "SELECT * FROM `system_user` s ,`request` r WHERE r.user_id=s.user_id AND r.request_status='Pending' AND r.request_type='Normal' AND s.user_type='principleinvestigator'";
+
+						$result = $conn->query($query) ;
+						
+						echo '<select  class="form-control input-default" id="type_approver" name="type_approver"   style="width:300px;" onchange="enableTextbox()" >';
+						echo ' <option value="" >Choose an Request ID....</option> '; 
+						while ($row = $result->fetch_array()) {	
+	  
+							echo "<option value='" . $row['request_id'] ."'>" . $row['request_id'] ."</option>"; 
+						}
+						echo '</select>';
+							
+						?>
+						
+						</br> 
+						
+						<button type="accept" class="btn btn-primary" name="accept" id="accept">Accept</button>
+						<button type="reject" class="btn btn-primary" name="reject" id="reject">Reject</button>
+						
+						</div> <!--col-md-4-->
+						 
+             </div><!--row-->
                   <div class="footer">
                     <div class="footer-left">
                         <span>&copy; 2015.Group-11. All Rights Reserved.</span>
