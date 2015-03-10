@@ -99,6 +99,22 @@ class DB_CONNECT{
 		}
 		return "success";
 	}
+	#rejects a request by getting an request id
+	function reject_requests($reqid)
+	{
+		$con =new mysqli(DB_SERVER, DB_USER, DB_PASSWORD,DB_DATABASE);
+		$qry="update `request` set request_status='Declined' where request_id=".$reqid;
+		$result=$con->query($qry);
+		if($result == 1)
+		{
+		
+		}
+		else
+		{
+			echo "Failed to Approve";
+		}
+		return "success";
+	}
 	
 	#function to retrieve all request ids's
 	function retrieve_req()
@@ -127,5 +143,33 @@ class DB_CONNECT{
 		
 		
 	}
+	#return all pending requests ID
+	function retrieve_req_pending_id()
+	{
+		$con=new mysqli(DB_SERVER,DB_USER,DB_PASSWORD,DB_DATABASE);
+		$qry="select request_id from `request` WHERE request_status='Pending'";
+		$result=$con->query($qry);
+		$response;
+		if( $result->num_rows>0)
+			{
+				
+				while($row = $result->fetch_assoc())
+				{
+
+					$response[]=array('REQ_ID'=>$row["request_id"]);
+		
+				}
+			}
+			else
+			{
+				$response[]=array("success"=>"error");
+	
+			}
+		$con->close();
+		return json_encode($response);
+		
+		
+	}
+
 }
 ?>

@@ -185,7 +185,56 @@
                         
                         
                     </div><!--col-md-8-->
-                    
+                    <div class="col-md-4">
+						<div class="widgetbox">
+							<h4 class="widgettitle">Approve or Reject <a class="close">&times;</a> <a class="minimize">&#8211;</a></h4>
+							<div class="widgetcontent">
+								<div>
+									choose request id: 
+									<select class="uniformselect" style="width:170">
+									<option value=""> choose an Id </option>
+									<?php 
+									$only_requestid;
+									$x=0;
+							
+									$response=$db->retrieve_req_pending_id();
+									$json=json_decode($response,true);
+							
+									for($x=0;$x<count($json);$x++)
+									{
+								
+										if(isset($json[$x]['REQ_ID']) != null)
+										{
+											echo "<option value='".$json[$x]['REQ_ID']."'>".$json[$x]['REQ_ID']."</option>";
+										}
+								
+							
+									}	
+								
+									?>
+									</select>
+								</div>
+								<br>
+								<div>
+									<button name="submit" id="submit" onclick="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up glyphicon-white"></span> Approve</button>
+									<button name="reject" id="reject" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-thumbs-down"></span> Reject</button>
+								</div>
+								<?php
+								if(isset($_POST['accept']) !=null)
+								{
+								$selected_id=$_POST['choice'];
+								$db->approve_requests($selected_id);
+								}
+								else if( isset($_POST['reject']) != null)
+								{
+								$selected_id=$_POST['reject'];
+								$db->reject_requests($selected_id);
+								}
+								?>	
+								
+							</div>
+						</div><!--widgetbox-->
+					</div><!--col-md-4-->
                     
                 </div><!--row-->
                 

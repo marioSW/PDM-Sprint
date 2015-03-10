@@ -116,14 +116,6 @@
 										require_once __DIR__ .'/DB/db_connect.php';
 										$db=new DB_CONNECT();
 
-										function approve_req($reqid)
-										{			
-											if(isset($_POST["$reqid"]))
-											$db->approve_requests($reqid);
-											
-	
-										}
-
 										//variables
 										$reqid=array();
 										$reqtype;
@@ -196,7 +188,7 @@
 							<div class="widgetcontent">
 								<div>
 									choose request id: 
-									<select class="uniformselect" style="width:170">
+									<select name="choice" class="uniformselect" style="width:170">
 									<option value=""> choose an Id </option>
 									<?php 
 									$only_requestid;
@@ -221,14 +213,26 @@
 								</div>
 								<br>
 								<div>
-									<button href="" id="submit" onclick="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up glyphicon-white"></span> Approve</button>
-									<button href="" id="reject" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-thumbs-down"></span> Reject</button>
+									<button name="accept" id="submit" onclick="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up glyphicon-white"></span> Approve</button>
+									<button name="reject" id="reject" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-thumbs-down"></span> Reject</button>
 								</div>
-									
+								<?php
+								if(isset($_POST['accept'])!=null)
+								{
+								$selected_id=$_post['choice'];
+								echo $selected_id;
+								$db->approve_requests($selected_id);
+								}
+								else if( isset($_POST['reject']) != null)
+								{
+								$selected_id=$_POST['reject'];
+								$db->reject_requests($selected_id);
+								}
+								?>
 								
 							</div>
 						</div><!--widgetbox-->
-					</div><!--col-md-8-->
+					</div><!--col-md-4-->
                 </div><!--row-->
                 
                    <div class="footer">
