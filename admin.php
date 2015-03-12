@@ -139,13 +139,13 @@
                                     <div class="comment-info">
                                        <div class="row">
 											
-											<div class=col-md-6>
+											<div class="col-md-6 ">
 												<h4><b><?php echo "Requested by	 : ".$username?></b></h4>																						
 												<h5><?php echo "<b>Request Type  :</b> ".$reqtype; ?></h5>
 												<h5><?php echo "<b>Request Date  :</b> ".$reqdate; ?></h5>
-												</div>
-												<span class=col-md-6 ><h5><b><?php echo "Request ID   :".$reqid[$x]?></h5></b></span>	
 											</div>
+												<span class="col-md-6" ><h5><b><?php echo "Request ID   :".$reqid?></h5></b></span>	
+										</div>
                                     </div>
                                 </li>
                                 
@@ -189,9 +189,10 @@
 						<div class="widgetbox">
 							<h4 class="widgettitle">Approve or Reject <a class="close">&times;</a> <a class="minimize">&#8211;</a></h4>
 							<div class="widgetcontent">
-								<div>
+								<form id="form" class="form-horizontal" role="form" action="" method="post">
+								<div class="form-group">
 									choose request id: 
-									<select class="uniformselect" style="width:170">
+									<select class="uniformselect" name="choice" style="width:170">
 									<option value=""> choose an Id </option>
 									<?php 
 									$only_requestid;
@@ -215,23 +216,26 @@
 									</select>
 								</div>
 								<br>
-								<div>
-									<button name="submit" id="submit" onclick="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up glyphicon-white"></span> Approve</button>
+								<div class="form-group">
+									<button name="accept" id="accept" onclick="" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-thumbs-up glyphicon-white"></span> Approve</button>
 									<button name="reject" id="reject" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-thumbs-down"></span> Reject</button>
 								</div>
 								<?php
-								if(isset($_POST['accept']) !=null)
+								$selected_id;
+								if(isset($_POST['accept']))
 								{
-								$selected_id=$_POST['choice'];
-								$db->approve_requests($selected_id);
+								$selected_id=(isset($_POST['choice']) ? $_POST['choice'] : null);
+								
+								$response=$db->approve_requests($selected_id);
 								}
-								else if( isset($_POST['reject']) != null)
+								else if( isset($_POST['reject']))
 								{
-								$selected_id=$_POST['reject'];
-								$db->reject_requests($selected_id);
+								$selected_id=(isset($_POST['choice']) ? $_POST['choice'] : null);
+								$response=$db->reject_requests($selected_id);
+								
 								}
 								?>	
-								
+							</form>	
 							</div>
 						</div><!--widgetbox-->
 					</div><!--col-md-4-->

@@ -86,34 +86,36 @@ class DB_CONNECT{
 	#Function to approve requests by adding id
 	function approve_requests($reqid)
 	{
+		$response;
 		$con =new mysqli(DB_SERVER, DB_USER, DB_PASSWORD,DB_DATABASE);
-		$qry="update `request` set request_status='Approved' where request_id=".$reqid;
+		$qry="update `request` set request_status='Approved' where `request_id`=".$reqid;
 		$result=$con->query($qry);
 		if($result == 1)
 		{
-		
+			$response="success";
 		}
 		else
 		{
-			echo "Failed to Approve";
+			$response="failed";
 		}
-		return "success";
+		return $response;
 	}
 	#rejects a request by getting an request id
 	function reject_requests($reqid)
 	{
+		$response;
 		$con =new mysqli(DB_SERVER, DB_USER, DB_PASSWORD,DB_DATABASE);
-		$qry="update `request` set request_status='Declined' where request_id=".$reqid;
+		$qry="update `request` set request_status='Rejected' where `request_id`=".$reqid;
 		$result=$con->query($qry);
 		if($result == 1)
 		{
-		
+			$response="success";
 		}
 		else
 		{
-			echo "Failed to Approve";
+			$response="failed";
 		}
-		return "success";
+		return $response;
 	}
 	
 	#function to retrieve all request ids's
